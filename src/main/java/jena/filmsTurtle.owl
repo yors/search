@@ -1,0 +1,578 @@
+@prefix : <http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix untitled-ontology-21: <http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#> .
+@base <http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21> .
+
+<http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21> rdf:type owl:Ontology .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLObjectProperty_0430afe4_33f1_425a_9f71_f0a27bbe04fb
+
+:OWLObjectProperty_0430afe4_33f1_425a_9f71_f0a27bbe04fb rdf:type owl:ObjectProperty ;
+                                                        
+                                                        rdfs:label "make"@it ;
+                                                        
+                                                        rdfs:range :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ;
+                                                        
+                                                        rdfs:domain :OWLClass_a38fd609_899c_4c30_ac5a_911464051b66 .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLObjectProperty_ad67a2f4_ef8e_42b7_832a_df4c74df3af7
+
+:OWLObjectProperty_ad67a2f4_ef8e_42b7_832a_df4c74df3af7 rdf:type owl:ObjectProperty ;
+                                                        
+                                                        rdfs:label "produce"@it ;
+                                                        
+                                                        rdfs:domain :OWLClass_5bc806ec_58a8_4457_996e_93b4f10629fd ;
+                                                        
+                                                        rdfs:range :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLObjectProperty_dbfaaffe_5db2_4d6c_92dc_21d46b132c86
+
+:OWLObjectProperty_dbfaaffe_5db2_4d6c_92dc_21d46b132c86 rdf:type owl:ObjectProperty ;
+                                                        
+                                                        rdfs:label "played"@it ;
+                                                        
+                                                        rdfs:range :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ;
+                                                        
+                                                        rdfs:domain :OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106 .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001
+
+:OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001 rdf:type owl:DatatypeProperty ;
+                                                      
+                                                      rdfs:label "age"@it ;
+                                                      
+                                                      rdfs:domain :OWLClass_a38fd609_899c_4c30_ac5a_911464051b66 ,
+                                                                  :OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106 ;
+                                                      
+                                                      rdfs:range xsd:integer .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81
+
+:OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 rdf:type owl:DatatypeProperty ;
+                                                      
+                                                      rdfs:label "title"@it ;
+                                                      
+                                                      rdfs:domain :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ;
+                                                      
+                                                      rdfs:range xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLDataProperty_6406f83e_f8aa_4f8f_af27_436f4944bcfc
+
+:OWLDataProperty_6406f83e_f8aa_4f8f_af27_436f4944bcfc rdf:type owl:DatatypeProperty ;
+                                                      
+                                                      rdfs:label "name"@it ;
+                                                      
+                                                      rdfs:domain :OWLClass_5bc806ec_58a8_4457_996e_93b4f10629fd ;
+                                                      
+                                                      rdfs:range xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df
+
+:OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df rdf:type owl:DatatypeProperty ;
+                                                      
+                                                      rdfs:label "date"@it ;
+                                                      
+                                                      rdfs:domain :OWLClass_5bc806ec_58a8_4457_996e_93b4f10629fd ,
+                                                                  :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ;
+                                                      
+                                                      rdfs:range xsd:dateTime .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166
+
+:OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 rdf:type owl:DatatypeProperty ;
+                                                      
+                                                      rdfs:label "type"@it ;
+                                                      
+                                                      rdfs:domain :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ;
+                                                      
+                                                      rdfs:range xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLDataProperty_c345d028_9e91_4390_a1c3_b1cd679567f8
+
+:OWLDataProperty_c345d028_9e91_4390_a1c3_b1cd679567f8 rdf:type owl:DatatypeProperty ;
+                                                      
+                                                      rdfs:label "last_name"@it ;
+                                                      
+                                                      rdfs:domain :OWLClass_a38fd609_899c_4c30_ac5a_911464051b66 ,
+                                                                  :OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106 ;
+                                                      
+                                                      rdfs:range xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLDataProperty_fc1276ad_f87c_43c7_a445_4c58c26ea9a8
+
+:OWLDataProperty_fc1276ad_f87c_43c7_a445_4c58c26ea9a8 rdf:type owl:DatatypeProperty ;
+                                                      
+                                                      rdfs:label "first_name"@it ;
+                                                      
+                                                      rdfs:domain :OWLClass_a38fd609_899c_4c30_ac5a_911464051b66 ,
+                                                                  :OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106 ;
+                                                      
+                                                      rdfs:range xsd:string .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLClass_5bc806ec_58a8_4457_996e_93b4f10629fd
+
+:OWLClass_5bc806ec_58a8_4457_996e_93b4f10629fd rdf:type owl:Class ;
+                                               
+                                               rdfs:label "Producer"@it .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337
+
+:OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 rdf:type owl:Class ;
+                                               
+                                               rdfs:label "Film"@it .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLClass_a38fd609_899c_4c30_ac5a_911464051b66
+
+:OWLClass_a38fd609_899c_4c30_ac5a_911464051b66 rdf:type owl:Class ;
+                                               
+                                               rdfs:label "Film-Maker"@it .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106
+
+:OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106 rdf:type owl:Class ;
+                                               
+                                               rdfs:label "Actor"@it .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_07a957ba_3159_4023_a75d_f0b3da760e76
+
+:OWLNamedIndividual_07a957ba_3159_4023_a75d_f0b3da760e76 rdf:type :OWLClass_5bc806ec_58a8_4457_996e_93b4f10629fd ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "producer1"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2000"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_6406f83e_f8aa_4f8f_af27_436f4944bcfc "paramount pictures"^^xsd:string ;
+                                                         
+                                                         :OWLObjectProperty_ad67a2f4_ef8e_42b7_832a_df4c74df3af7 :OWLNamedIndividual_6726fb58_9038_4af5_970c_f90d31d5d8f3 ,
+                                                                                                                 :OWLNamedIndividual_8452b2aa_ddb1_4b9e_9ce0_a187eb08f725 ,
+                                                                                                                 :OWLNamedIndividual_a83f600d_7b6a_451a_9118_e5fb59bc74ce ,
+                                                                                                                 :OWLNamedIndividual_c90e1dfa_709c_4bf6_ae9c_5c04bdf30aac ,
+                                                                                                                 :OWLNamedIndividual_f33db775_574d_40f2_a849_761820dd217c .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_250b425d_8633_4092_843c_9960e8b4f61c
+
+:OWLNamedIndividual_250b425d_8633_4092_843c_9960e8b4f61c rdf:type :OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "actor2"@it ;
+                                                         
+                                                         :OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001 "20"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_c345d028_9e91_4390_a1c3_b1cd679567f8 "man"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_fc1276ad_f87c_43c7_a445_4c58c26ea9a8 "zack"^^xsd:string ;
+                                                         
+                                                         :OWLObjectProperty_dbfaaffe_5db2_4d6c_92dc_21d46b132c86 :OWLNamedIndividual_2b05ef42_c26f_41fa_8e16_0b3adc0c6289 ,
+                                                                                                                 :OWLNamedIndividual_379c868c_4bd1_4934_8c2b_824f42231e20 ,
+                                                                                                                 :OWLNamedIndividual_6726fb58_9038_4af5_970c_f90d31d5d8f3 ,
+                                                                                                                 :OWLNamedIndividual_8452b2aa_ddb1_4b9e_9ce0_a187eb08f725 ,
+                                                                                                                 :OWLNamedIndividual_97d894f9_a933_4cf4_aed2_5e3aa30f76bc ,
+                                                                                                                 :OWLNamedIndividual_a1c581f0_49c9_4d94_8a3a_69191c53208d ,
+                                                                                                                 :OWLNamedIndividual_a83f600d_7b6a_451a_9118_e5fb59bc74ce ,
+                                                                                                                 :OWLNamedIndividual_c90e1dfa_709c_4bf6_ae9c_5c04bdf30aac ,
+                                                                                                                 :OWLNamedIndividual_ddc46977_39ec_4c58_be36_0891fdcfa51f ,
+                                                                                                                 :OWLNamedIndividual_f33db775_574d_40f2_a849_761820dd217c .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_2b05ef42_c26f_41fa_8e16_0b3adc0c6289
+
+:OWLNamedIndividual_2b05ef42_c26f_41fa_8e16_0b3adc0c6289 rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film1"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2000"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "combat"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "mortal combat"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_2c432a6a_2250_4140_a54f_f701209dd8f1
+
+:OWLNamedIndividual_2c432a6a_2250_4140_a54f_f701209dd8f1 rdf:type :OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "actor1"@it ;
+                                                         
+                                                         :OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001 "25"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_fc1276ad_f87c_43c7_a445_4c58c26ea9a8 "eric"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_c345d028_9e91_4390_a1c3_b1cd679567f8 "yongoro"^^xsd:string ;
+                                                         
+                                                         :OWLObjectProperty_dbfaaffe_5db2_4d6c_92dc_21d46b132c86 :OWLNamedIndividual_2b05ef42_c26f_41fa_8e16_0b3adc0c6289 ,
+                                                                                                                 :OWLNamedIndividual_379c868c_4bd1_4934_8c2b_824f42231e20 ,
+                                                                                                                 :OWLNamedIndividual_6726fb58_9038_4af5_970c_f90d31d5d8f3 ,
+                                                                                                                 :OWLNamedIndividual_a1c581f0_49c9_4d94_8a3a_69191c53208d ,
+                                                                                                                 :OWLNamedIndividual_c90e1dfa_709c_4bf6_ae9c_5c04bdf30aac ,
+                                                                                                                 :OWLNamedIndividual_f33db775_574d_40f2_a849_761820dd217c .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_379c868c_4bd1_4934_8c2b_824f42231e20
+
+:OWLNamedIndividual_379c868c_4bd1_4934_8c2b_824f42231e20 rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film2"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2009"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "comdedie"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "le bon pere"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_39531c55_fa54_49a5_8858_900caed0fe4e
+
+:OWLNamedIndividual_39531c55_fa54_49a5_8858_900caed0fe4e rdf:type :OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "actor3"@it ;
+                                                         
+                                                         :OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001 "23"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_c345d028_9e91_4390_a1c3_b1cd679567f8 "abdel"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_fc1276ad_f87c_43c7_a445_4c58c26ea9a8 "mehdi"^^xsd:string ;
+                                                         
+                                                         :OWLObjectProperty_dbfaaffe_5db2_4d6c_92dc_21d46b132c86 :OWLNamedIndividual_379c868c_4bd1_4934_8c2b_824f42231e20 ,
+                                                                                                                 :OWLNamedIndividual_8452b2aa_ddb1_4b9e_9ce0_a187eb08f725 ,
+                                                                                                                 :OWLNamedIndividual_97d894f9_a933_4cf4_aed2_5e3aa30f76bc ,
+                                                                                                                 :OWLNamedIndividual_a83f600d_7b6a_451a_9118_e5fb59bc74ce ,
+                                                                                                                 :OWLNamedIndividual_ddc46977_39ec_4c58_be36_0891fdcfa51f .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_5a76b26a_df5f_450f_a2fc_3c2b88bbd8ac
+
+:OWLNamedIndividual_5a76b26a_df5f_450f_a2fc_3c2b88bbd8ac rdf:type owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "date"@it .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_6629f08c_d592_4d29_95bb_fb2aa84f2c86
+
+:OWLNamedIndividual_6629f08c_d592_4d29_95bb_fb2aa84f2c86 rdf:type :OWLClass_a38fd609_899c_4c30_ac5a_911464051b66 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film_maker2"@it ;
+                                                         
+                                                         :OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001 "22"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_c345d028_9e91_4390_a1c3_b1cd679567f8 "lionel"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_fc1276ad_f87c_43c7_a445_4c58c26ea9a8 "yorick"^^xsd:string ;
+                                                         
+                                                         :OWLObjectProperty_0430afe4_33f1_425a_9f71_f0a27bbe04fb :OWLNamedIndividual_2b05ef42_c26f_41fa_8e16_0b3adc0c6289 ,
+                                                                                                                 :OWLNamedIndividual_379c868c_4bd1_4934_8c2b_824f42231e20 ,
+                                                                                                                 :OWLNamedIndividual_a1c581f0_49c9_4d94_8a3a_69191c53208d .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_6726fb58_9038_4af5_970c_f90d31d5d8f3
+
+:OWLNamedIndividual_6726fb58_9038_4af5_970c_f90d31d5d8f3 rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film6"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2006"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "comedie"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "rire a gogo"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_8452b2aa_ddb1_4b9e_9ce0_a187eb08f725
+
+:OWLNamedIndividual_8452b2aa_ddb1_4b9e_9ce0_a187eb08f725 rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film9"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2000"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "comedie"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "ziden et github"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_8edba843_b4af_4acb_b997_1408565866f9
+
+:OWLNamedIndividual_8edba843_b4af_4acb_b997_1408565866f9 rdf:type owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "type"@it .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_94ad003d_db2a_4e83_b7f9_66df00013862
+
+:OWLNamedIndividual_94ad003d_db2a_4e83_b7f9_66df00013862 rdf:type :OWLClass_a38fd609_899c_4c30_ac5a_911464051b66 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film_maker3"@it ;
+                                                         
+                                                         :OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001 "20"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_c345d028_9e91_4390_a1c3_b1cd679567f8 "alassane"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_fc1276ad_f87c_43c7_a445_4c58c26ea9a8 "ndiaye"^^xsd:string ;
+                                                         
+                                                         :OWLObjectProperty_0430afe4_33f1_425a_9f71_f0a27bbe04fb :OWLNamedIndividual_8452b2aa_ddb1_4b9e_9ce0_a187eb08f725 ,
+                                                                                                                 :OWLNamedIndividual_a83f600d_7b6a_451a_9118_e5fb59bc74ce ,
+                                                                                                                 :OWLNamedIndividual_c90e1dfa_709c_4bf6_ae9c_5c04bdf30aac ,
+                                                                                                                 :OWLNamedIndividual_f33db775_574d_40f2_a849_761820dd217c .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_97d894f9_a933_4cf4_aed2_5e3aa30f76bc
+
+:OWLNamedIndividual_97d894f9_a933_4cf4_aed2_5e3aa30f76bc rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film4"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2000"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "la beaute"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "romance"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_a1c581f0_49c9_4d94_8a3a_69191c53208d
+
+:OWLNamedIndividual_a1c581f0_49c9_4d94_8a3a_69191c53208d rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film3"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2009"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "combat"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "cyborg"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_a83f600d_7b6a_451a_9118_e5fb59bc74ce
+
+:OWLNamedIndividual_a83f600d_7b6a_451a_9118_e5fb59bc74ce rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film7"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2012"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "combat"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "yorick dans la jungle"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_ac4170c5_f77d_4106_a98c_5e524041e420
+
+:OWLNamedIndividual_ac4170c5_f77d_4106_a98c_5e524041e420 rdf:type :OWLClass_a38fd609_899c_4c30_ac5a_911464051b66 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film_maker1"@it ;
+                                                         
+                                                         :OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001 "25"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_fc1276ad_f87c_43c7_a445_4c58c26ea9a8 "eric"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_c345d028_9e91_4390_a1c3_b1cd679567f8 "yongoro"^^xsd:string ;
+                                                         
+                                                         :OWLObjectProperty_0430afe4_33f1_425a_9f71_f0a27bbe04fb :OWLNamedIndividual_6726fb58_9038_4af5_970c_f90d31d5d8f3 ,
+                                                                                                                 :OWLNamedIndividual_97d894f9_a933_4cf4_aed2_5e3aa30f76bc ,
+                                                                                                                 :OWLNamedIndividual_ddc46977_39ec_4c58_be36_0891fdcfa51f .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_b0b2287a_25e3_49d9_91e6_b606f7f0f075
+
+:OWLNamedIndividual_b0b2287a_25e3_49d9_91e6_b606f7f0f075 rdf:type :OWLClass_5bc806ec_58a8_4457_996e_93b4f10629fd ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "producer2"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2004"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_6406f83e_f8aa_4f8f_af27_436f4944bcfc "Warner Bross entertainment"^^xsd:string ;
+                                                         
+                                                         :OWLObjectProperty_ad67a2f4_ef8e_42b7_832a_df4c74df3af7 :OWLNamedIndividual_2b05ef42_c26f_41fa_8e16_0b3adc0c6289 ,
+                                                                                                                 :OWLNamedIndividual_379c868c_4bd1_4934_8c2b_824f42231e20 ,
+                                                                                                                 :OWLNamedIndividual_97d894f9_a933_4cf4_aed2_5e3aa30f76bc ,
+                                                                                                                 :OWLNamedIndividual_a1c581f0_49c9_4d94_8a3a_69191c53208d ,
+                                                                                                                 :OWLNamedIndividual_ddc46977_39ec_4c58_be36_0891fdcfa51f .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_c2b99062_c03a_475e_8296_74746b9c4a25
+
+:OWLNamedIndividual_c2b99062_c03a_475e_8296_74746b9c4a25 rdf:type :OWLClass_aa008e32_5b0b_4b58_bf0f_5277f2422106 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "actor4"@it ;
+                                                         
+                                                         :OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001 "21"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_c345d028_9e91_4390_a1c3_b1cd679567f8 "mamouni"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_fc1276ad_f87c_43c7_a445_4c58c26ea9a8 "soukaina"^^xsd:string ;
+                                                         
+                                                         :OWLObjectProperty_dbfaaffe_5db2_4d6c_92dc_21d46b132c86 :OWLNamedIndividual_2b05ef42_c26f_41fa_8e16_0b3adc0c6289 ,
+                                                                                                                 :OWLNamedIndividual_379c868c_4bd1_4934_8c2b_824f42231e20 ,
+                                                                                                                 :OWLNamedIndividual_6726fb58_9038_4af5_970c_f90d31d5d8f3 ,
+                                                                                                                 :OWLNamedIndividual_8452b2aa_ddb1_4b9e_9ce0_a187eb08f725 ,
+                                                                                                                 :OWLNamedIndividual_97d894f9_a933_4cf4_aed2_5e3aa30f76bc ,
+                                                                                                                 :OWLNamedIndividual_a1c581f0_49c9_4d94_8a3a_69191c53208d ,
+                                                                                                                 :OWLNamedIndividual_a83f600d_7b6a_451a_9118_e5fb59bc74ce ,
+                                                                                                                 :OWLNamedIndividual_c90e1dfa_709c_4bf6_ae9c_5c04bdf30aac ,
+                                                                                                                 :OWLNamedIndividual_ddc46977_39ec_4c58_be36_0891fdcfa51f ,
+                                                                                                                 :OWLNamedIndividual_f33db775_574d_40f2_a849_761820dd217c .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_c90e1dfa_709c_4bf6_ae9c_5c04bdf30aac
+
+:OWLNamedIndividual_c90e1dfa_709c_4bf6_ae9c_5c04bdf30aac rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film10"@it ;
+                                                         
+                                                         :OWLDataProperty_3ea7b8c5_30a9_46aa_a33a_82f24fde2001 "2000"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "amour et folie"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "romance"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_cfe509f5_36d1_4625_b96a_926750c03476
+
+:OWLNamedIndividual_cfe509f5_36d1_4625_b96a_926750c03476 rdf:type owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "title"@it .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_ddc46977_39ec_4c58_be36_0891fdcfa51f
+
+:OWLNamedIndividual_ddc46977_39ec_4c58_be36_0891fdcfa51f rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film5"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2009"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "combat"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "mort dans la peau"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_f33db775_574d_40f2_a849_761820dd217c
+
+:OWLNamedIndividual_f33db775_574d_40f2_a849_761820dd217c rdf:type :OWLClass_8a5c3ccb_2da8_4808_8165_a7a085639337 ,
+                                                                  owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "film8"@it ;
+                                                         
+                                                         :OWLDataProperty_75215c6a_7b4c_4cbd_9131_4942917d83df "2000"^^xsd:dateTime ;
+                                                         
+                                                         :OWLDataProperty_528c3c77_468d_4d0c_8039_b061a9f5bc81 "la vie amoureuse de alassane"^^xsd:string ;
+                                                         
+                                                         :OWLDataProperty_be0e4a54_354a_41d8_8cf3_d65c64204166 "romance"^^xsd:string .
+
+
+
+###  http://www.semanticweb.org/daniel/ontologies/2014/10/untitled-ontology-21#OWLNamedIndividual_f9ac81db_2dd0_4a5b_be5f_793783936bc9
+
+:OWLNamedIndividual_f9ac81db_2dd0_4a5b_be5f_793783936bc9 rdf:type owl:NamedIndividual ;
+                                                         
+                                                         rdfs:label "Film1"@it .
+
+
+
+
+###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
+

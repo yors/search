@@ -1,0 +1,35 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.semanticweb.org/mohamed/ontologies/2014/11/untitled-ontology-8#" > 
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#NamedIndividual">
+    <rdf:type>httpwwwsemanticweborgmohamedontologies201411untitledontology8actor5_Film12</rdf:type>
+    <rdf:type>httpwwwsemanticweborgmohamedontologies201411untitledontology8actor3_Film12</rdf:type>
+    <rdf:type>httpwwwsemanticweborgmohamedontologies201411untitledontology8filmMaker4</rdf:type>
+    <rdf:type>httpwwwsemanticweborgmohamedontologies201411untitledontology8actor4_Film12</rdf:type>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/mohamed/ontologies/2014/11/untitled-ontology-8#film12">
+    <j.0:makes>httpwwwsemanticweborgmohamedontologies201411untitledontology8filmMaker12</j.0:makes>
+    <j.0:playing>httpwwwsemanticweborgmohamedontologies201411untitledontology8actor5_Film12</j.0:playing>
+    <j.0:playing>httpwwwsemanticweborgmohamedontologies201411untitledontology8actor3_Film12</j.0:playing>
+    <rdf:type>httpwwww3org200207owlNamedIndividual</rdf:type>
+    <j.0:playing>httpwwwsemanticweborgmohamedontologies201411untitledontology8actor4_Film12</j.0:playing>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/mohamed/ontologies/2014/11/untitled-ontology-8#filmMaker4">
+    <j.0:makes>httpwwwsemanticweborgmohamedontologies201411untitledontology8film4</j.0:makes>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/mohamed/ontologies/2014/11/untitled-ontology-8#Producer4">
+    <rdf:type>httpwwww3org200207owlNamedIndividual</rdf:type>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/mohamed/ontologies/2014/11/untitled-ontology-8#actor3_Film4">
+    <rdf:type>httpwwww3org200207owlNamedIndividual</rdf:type>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/mohamed/ontologies/2014/11/untitled-ontology-8#Producer12">
+    <rdf:type>httpwwww3org200207owlNamedIndividual</rdf:type>
+    <j.0:produces>httpwwwsemanticweborgmohamedontologies201411untitledontology8film12</j.0:produces>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/mohamed/ontologies/2014/11/untitled-ontology-8#film4">
+    <j.0:produces>httpwwwsemanticweborgmohamedontologies201411untitledontology8Producer4</j.0:produces>
+    <rdf:type>httpwwww3org200207owlNamedIndividual</rdf:type>
+    <j.0:playing>httpwwwsemanticweborgmohamedontologies201411untitledontology8actor3_Film4</j.0:playing>
+  </rdf:Description>
+</rdf:RDF>
