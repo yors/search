@@ -373,17 +373,18 @@ public class projectFrame
 				else
 				{
 					//Supprime l'onglet resultat recherche si il existe
-					try
-					{
-						onglet.removeTabAt(2);
-					}
-					catch(Exception e)
-					{
-
-					}
+					
 					a=action.getpath()[0];
 				}
+				
+				try
+				{
+					onglet.removeTabAt(2);
+				}
+				catch(Exception e)
+				{
 
+				}
 				GrapheSteiner=new SousGraph(a,Resource,graphfinal,f,onglet,true);
 
 				GrapheSteiner.exec();
@@ -416,7 +417,7 @@ public class projectFrame
 				//à partir du model  'ModelSparql' si le model a été crée vous devez lire son fichier RDF dans 
 				//src/main/java/jena/out.rdf
 
-				GrapheSteiner.ecrireFileRDF( LienFichierRDF);
+				//GrapheSteiner.ecrireFileRDF( LienFichierRDF);
 
 
 				//***********************************************************************//
@@ -467,7 +468,7 @@ public class projectFrame
 					//LIGNE ERIC
 
 					System.out.println("LE MODEL SPARK RENVOIE:"+resultModel.size()+" "+"NOEUDS");
-					SousGraph GrapheSparql=new SousGraph(graphsparc,onglet,resultModel,false);
+					//SousGraph GrapheSparql=new SousGraph(graphsparc,onglet,resultModel,false);
 					//output query result
 
 					//ResultSetFormatter.out(System.out, results, query);
@@ -528,6 +529,7 @@ public class projectFrame
 
 
 		//construction du map de Documents lucene vide
+		
 		HashMap<String,Set<Document>> map = new HashMap<String,Set<Document>>();
 		tableModel = new JTableRessourceModel(map);
 		tableModel.fireTableDataChanged();
@@ -581,6 +583,7 @@ public class projectFrame
 		// The directory is now empty so delete it
 		return i;
 	}
+	
 	//PARCOUR DU MOte()DEL  ModelSparql
 
 	public void parcours(){

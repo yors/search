@@ -137,7 +137,7 @@ public class SousGraph {
 		//System.out.println("NOMBRE DE STATEMENT:"+ newmodel.size());
 
 		//LIGNE ERIC
-		if(!f)
+		if(f)
 		{
 			Viewer viewer = new Viewer(graphfinal, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 			viewer.enableAutoLayout();
@@ -223,6 +223,7 @@ public class SousGraph {
 	}
 
 	//Cree un fichier RDF
+	
 	public void ecrireFileRDF(String fichier){
 
 		try (OutputStream out = new BufferedOutputStream(new FileOutputStream(fichier),1024)) {
@@ -246,9 +247,11 @@ public class SousGraph {
 
 			RDFNode source= g.getSource(s);
 			RDFNode destination= g.getDest(s);
-			CreateNoeud(source.toString(),graphinit);
-			CreateNoeud(destination.toString(),graphinit);
-			CreateEdge(j+"",source.toString(),destination.toString(),s.getPredicate().toString(),graphinit);
+			String dest=destination.toString().replaceAll("[^\\w]","");
+			String sourc=source.toString().replaceAll("[^\\w]","");
+			CreateNoeud(sourc,graphinit);
+			CreateNoeud(dest,graphinit);
+			CreateEdge(j+"",sourc,dest,s.getPredicate().toString(),graphinit);
 			j++;
 
 		}
@@ -341,13 +344,13 @@ public class SousGraph {
 
 
 								//Construction du NOUVEAU MODEL
-								String resource    =path.get(i).toString();
+								String resource    =path.get(i).toString().replaceAll("[^\\w]","");
 								String predicat    =e1.getPredicate().toString();
 								String litteral   = path.get(i+1).toString();
 								String litn;
 								litteral=litteral.replaceAll("[^\\w]","");
 								//litn=transform( litn,"http");
-
+								Resource johnSmith = model.createResource(resource);
 								newmodel.add(model.getResource(resource),model.getProperty(predicat),litteral);
 
 							}

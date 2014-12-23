@@ -74,17 +74,7 @@ public class Indexing {
 	
 		 this.model = model;
 		 indexAnalyser = new StandardAnalyzer();
-		 File a=new File("lucene1");
-		 if(a.exists()){}
-		 else
-		 new File("lucene1").mkdir();
-		 File source = new File("src/main/java/lucene/lucene");
-		 if(source.renameTo(new File("lucene1")))
-			    System.out.println("OK");
-			else
-			    System.out.println("Erreur");
-		// Files.move(source, cible);
-		 indexFile = new File("src/main/java/lucene/lucene");
+		 indexFile = new File("lucene");
 		deleteDirectory();
 		
 		 indexDirectory = FSDirectory.open(indexFile);
