@@ -147,8 +147,61 @@ public class projectFrame
 
 	//Construction du Menu
 
-	private void initMenu(){
+	private void InitMenu(){
 
+
+		f=new JFrame();
+		f.setLocationRelativeTo(null);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setTitle("Searching in RDF graphs");
+
+		f.setSize(800, 800);
+		f.setAlwaysOnTop(true);
+		f.setResizable(true);
+		f.setExtendedState( f.getExtendedState()|JFrame.MAXIMIZED_BOTH );
+		menuBar = new MyMenuBar(f);	
+
+		
+
+		//contruction du paneau superieur dans l'onglet "Recherche"
+
+		topPanel.setSize(660, 40);
+		JLabel recherchLabel = new JLabel("Recherche:");
+		topPanel.add(recherchLabel);
+		recherch = new ChampTexte(30);
+		recherch.setSize(40,25);
+		topPanel.add(recherch);
+		Icon precIcon = new ImageIcon("src/main/java/icones/icm.png");
+		updateGraph=new JButton();
+		updateGraph.setIcon(precIcon);
+        EditeurRdf = new JEditorPane();
+		topPanel.add(updateGraph);
+		topPanel.setSize(f.getWidth(),f.getHeight());
+		topPanel.setBackground(Color.WHITE);
+		
+		
+		GridBagLayout gb = new GridBagLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
+
+		gbc.weightx = 1;
+
+		gbc.weighty = 1;
+
+		gb.setConstraints(topPanel, gbc); // mise en forme des objets
+
+
+		//construction du map de Documents lucene vide
+		
+		HashMap<String,Set<Document>> map = new HashMap<String,Set<Document>>();
+		tableModel = new JTableRessourceModel(map);
+		tableModel.fireTableDataChanged();
+
+		tableau = new JTable(tableModel); 
+		tableau.setBackground(Color.WHITE);
+
+		centerPanel.setViewportView(tableau);
+		gb.setConstraints(centerPanel, gbc);
 
 		// choisir un type de curseur sur  le menu 
 
@@ -165,28 +218,28 @@ public class projectFrame
 		exit.setMnemonic(KeyEvent.VK_E);
 		exit.setToolTipText("Exit application");
 		exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,ActionEvent.CTRL_MASK));
-		exit.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-
-				System.exit(0);
-			}
-		});
-
 		menu.add(open);
 		menu.addSeparator();
 		menu.add(exit);
 
-
-
 		//redefinition des dimensions du  menu
-
 		menuBar.add(Box.createRigidArea(new Dimension(5,70)));
-
-
-
 		menuBar.add(menu);
+		
+		//initialisation des onglets
+				InitOnglet();
+				tPan[0].setLayout(gb);
+				tPan[0].add(topPanel);
+				tPan[0].add(centerPanel);
+		//On passe ensuite les onglets au contentpane de la fenetre principale
+		f.getContentPane().add(onglet);
+		f.setJMenuBar(menuBar);	
+		f.setLocationRelativeTo(null);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setSize(400, 200);
 
-		f.setJMenuBar(menuBar);		
+		f.setVisible(true);
+
 	}
 
 
@@ -194,6 +247,8 @@ public class projectFrame
 
 	public void InitOnglet()
 	{
+		
+	
 
 		//Création des Panneaux "Recherche,Editeur RDF,Resultat Recherche"
 
@@ -219,164 +274,55 @@ public class projectFrame
 			i++;
 		}
 
-
-
-		/*
-		 * 
-		 * 
-		 * mis à jours du fichier tmp.rdf situé dans le dossier 'src/main/java/jena
-   	    lors de l'écriture  dans  l'editeur EditeurRdf géré par l'onglet 'Editeur Rdf/owl;
-		 *
-		 *
-		 */
-
-		EditeurRdf.getDocument().addDocumentListener(new DocumentListener(){
-			public void insertUpdate(DocumentEvent de) { 
-				if(change!=1)
-				{
-					System.out.println("INsert");
-					System.out.println(EditeurRdf.getText());
-
-					FileWriter fw = null;  
-
-					try {
-						fw = new FileWriter(new File("src/main/java/jena/tmp.rdf"));
-						fw.write(EditeurRdf.getText());
-						fw.close();
-
-					} catch (FileNotFoundException e1) {
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-
-
-					Model model = FileManager.get().loadModel("src/main/java/jena/tmp.rdf");
-					File path = new File("src/main/java/lucene/lucene");
-
-					try
-					{
-						onglet.removeTabAt(2);
-					}
-					catch(Exception e)
-					{
-
-					}
-					try {
-						texteEditor=true;
-						action.SetTexteEditor( false);
-						group.semantic.search.rdf.App.index = new Indexing(model);
-						System.out.println("fichier tmp.rdf chargée!");
-						javax.swing.JOptionPane.showMessageDialog(f,"Le Texte saisis a été validé sous le nom 'tmp.rdf' dans le dossier 'src/main/java/jena/! Vous pouvez commencer à faire vos recherches en allant sur l'onglet 'Recherche' "); 
-
-					} 
-					catch (Exception ex) {	
-						ex.printStackTrace();
-						javax.swing.JOptionPane.showMessageDialog(f,"Il semble que ce fichier ne soit pas un rdf/ou du moins le fichier contient quelques erreurs...veuillez rédémarer l'application");
-					}
-
-				}
-				else
-					change=0;
-
-			}
-
-			public void removeUpdate(DocumentEvent de) { System.out.println("Remove");
-
-
-			if(change==0){}
-			else
-				change=1;}
-			public void changedUpdate(DocumentEvent arg0) {
-
-				System.out.println("change");change=1;
-			}
-		});
-
-		/*Fin de la mis à jours du fichier tmp.rdf*/
-
-
-
-
-
-
-
-		/*Action  éxécuter lors des changements des Onglets*/
-
-		onglet.addChangeListener(new ChangeListener(){
-
-			public void stateChanged(ChangeEvent e) { 
-				// init();
-
-				change=1;
-				EditeurRdf.setText("Saisissez un ensemble de données de type rdf ou owl ouFaite un copi-collé :) ....");          
-			} 
-
-		});
-
 	}
+public void InitActions()
+{
+	
+	/*Action  éxécuter lors des changements des Onglets*/
 
-	public  projectFrame() {
+	onglet.addChangeListener(new ChangeListener(){
 
+		public void stateChanged(ChangeEvent e) { 
+			// init();
 
+			change=1;
+			EditeurRdf.setText("Saisissez un ensemble de données de type rdf ou owl ouFaite un copi-collé :) ....");          
+		} 
 
-		f=new JFrame();
-		EditeurRdf = new JEditorPane();
+	});
+	/*
+	 * 
+	 * 
+	 * mis à jours du fichier tmp.rdf situé dans le dossier 'src/main/java/jena
+	    lors de l'écriture  dans  l'editeur EditeurRdf géré par l'onglet 'Editeur Rdf/owl;
+	 *
+	 *
+	 */
 
+	EditeurRdf.getDocument().addDocumentListener(new DocumentListener(){
+		public void insertUpdate(DocumentEvent de) { 
+			if(change!=1)
+			{
+				System.out.println("INsert");
+				System.out.println(EditeurRdf.getText());
 
-		f.setLocationRelativeTo(null);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setTitle("Searching in RDF graphs");
+				FileWriter fw = null;  
 
-		f.setSize(800, 800);
-		f.setAlwaysOnTop(true);
-		f.setResizable(true);
-		f.setExtendedState( f.getExtendedState()|JFrame.MAXIMIZED_BOTH );
-		menuBar = new MyMenuBar(f);	
+				try {
+					fw = new FileWriter(new File("src/main/java/jena/tmp.rdf"));
+					fw.write(EditeurRdf.getText());
+					fw.close();
 
-
-
-		//contruction du paneau superieur dans l'onglet "Recherche"
-
-		topPanel.setSize(660, 40);
-		// topPanel.add(image);
-		JLabel recherchLabel = new JLabel("Recherche:");
-		topPanel.add(recherchLabel);
-		recherch = new ChampTexte(30);
-		recherch.setSize(40,25);
-		topPanel.add(recherch);
-		Icon precIcon = new ImageIcon("src/main/java/icones/icm.png");
-
-
-
-		updateGraph=new JButton();
-		updateGraph.setIcon(precIcon);
-		updateGraph.addActionListener(new ActionListener()	    
-		{
-
-			public void actionPerformed(ActionEvent arg0) {
-
-				List<String>Resource=new ArrayList<String>();
-				int val=tableModel.getRowCount();
-				int i=0;
-				for(i=0;i<val;i++)
-					Resource.add(tableModel.getValueAt(i,1).toString()); 
-				org.graphstream.graph.Graph graphfinal = new SingleGraph("GraphSteiner");
-				String a="";
-
-
-				if(texteEditor && !action.getTexteEditor())
-				{
-					a="src/main/java/jena/tmp.rdf";
-
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
-				else
-				{
-					//Supprime l'onglet resultat recherche si il existe
-					
-					a=action.getpath()[0];
-				}
-				
+
+
+				Model model = FileManager.get().loadModel("src/main/java/jena/tmp.rdf");
+				File path = new File("src/main/java/lucene/lucene");
+
 				try
 				{
 					onglet.removeTabAt(2);
@@ -385,204 +331,214 @@ public class projectFrame
 				{
 
 				}
-				GrapheSteiner=new SousGraph(a,Resource,graphfinal,f,onglet,true);
-
-				GrapheSteiner.exec();
-
-				//MODEL SPARQL crée par la classe SousGraph
-
-				ModelSparql=GrapheSteiner.getNewmodel();
-
-
-				//Permet de Vérifier le contenu du nouvel model 'ModelSparql' crée 
-
-				parcours();
-
-
-				//On récupère le  path du fichier rdf ou owl sélectionné à partir de 
-				// la classe OpenFileChooserAction1
-
-				String split=action.getpath()[1];
-
-				//On associe le path 'split' au  fichier  'out.rdf dans lequel le model 'ModelSparql' va 
-				//être générer (en rdf)
-
-				LienFichierRDF=split+"out.rdf";
-
-
-				System.out.println("liens----->"+a+" "+"split:"+ LienFichierRDF);
-
-
-				//création du fichier rdf du graph  de Steiner ' GrapheSteiner'
-				//à partir du model  'ModelSparql' si le model a été crée vous devez lire son fichier RDF dans 
-				//src/main/java/jena/out.rdf
-
-				//GrapheSteiner.ecrireFileRDF( LienFichierRDF);
-
-
-				//***********************************************************************//
-				//***********************  SPARQL QUERIES *******************************//
-				//***********************************************************************//
-
-				// String queryString = "CONSTRUCT {?subj ?prop ?obj }"
-				// 					+ " WHERE { ?subj a ?obj "
-				// 					+ "FILTER (?obj rdfs:subClassOf* ?subj.)}";
-
-				/* String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "        
-    						    		+"PREFIX owl:  <http://www.w3.org/2002/07/owl#> "
-    						    		+"PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#> "
-    						    		+"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
-    						    		+"PREFIX film: <http://data.linkedmdb.org/directory/film_company#>"
-    						 			+"CONSTRUCT { ?sub ?prop ?y }"
-    						    		+"WHERE { ?sub ?prop ?y }";
-    				 					//+ "WHERE { ?t rdfs:subClassOf* film:Class . ?y rdf:type ?t }";
-
-				 */
-
-				String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "        
-						+"PREFIX owl:  <http://www.w3.org/2002/07/owl#> "
-						+"PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#> "
-						+"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
-						//+"PREFIX film: <http://data.linkedmdb.org/directory/film_company#>"
-						+"CONSTRUCT { ?sub rdf:type  ?obj }"
-						//+ "?sub   rdf:type owl:Class }"
-						+"WHERE {?sub   rdf:type ?obj }";
-
-				/*String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "        
-    			    		+"PREFIX owl:  <http://www.w3.org/2002/07/owl#> "
-    			    		+"PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#> "
-    			    		+"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
-    			    		//+"PREFIX film: <http://data.linkedmdb.org/directory/#>"
-    			    		+"SELECT ?y"
-    			    		+"WHERE {?y rdf:type ?x }";
-    			    		//+"WHERE {?t rdfs:subClassOf* film:Class . ?y rdf:type ?t}";
-				 */
-				Query query = QueryFactory.create(queryString) ;
-				QueryExecution qexec = QueryExecutionFactory.create(query, ModelSparql);			 
-
-				try {					  
-					//ResultSet results = qexec.execSelect();
-					Model resultModel = qexec.execConstruct() ;		
-					org.graphstream.graph.Graph graphsparc = new SingleGraph("GraphSparql");
-
-					//LIGNE ERIC
-
-					System.out.println("LE MODEL SPARK RENVOIE:"+resultModel.size()+" "+"NOEUDS");
-					//SousGraph GrapheSparql=new SousGraph(graphsparc,onglet,resultModel,false);
-					//output query result
-
-					//ResultSetFormatter.out(System.out, results, query);
-
-					/*for ( ; results.hasNext() ; ){
-
-    					 		QuerySolution soln = results.nextSolution() ;					 		
-
-    					 		System.out.println("soln: "+soln.toString());
-    					 		System.out.println("test = "+soln.varNames().next());
-    					 		RDFNode n = soln.get(); //soln.get("x");
-    					 		if ( n.isLiteral() ){
-    					 	          ((Literal)n).getLexicalForm();
-    					 	          System.out.println("je suis Literal");
-    					 		}
-    					 	    if ( n.isResource() )
-    					 	    {
-    					 	         Resource r = (Resource)n ;
-    					 	        System.out.println("je suis ressource");
-    					 	          if ( ! r.isAnon() )
-    					 	          {
-    					 	            r.getURI();
-    					 	            System.out.println("je suis noeud anonyme");
-    					 	          }
-    					 	    }
-    					 	}*/
-
+				try {
+					texteEditor=true;
+					action.SetTexteEditor( false);
+					group.semantic.search.rdf.App.index = new Indexing(model);
+					System.out.println("fichier tmp.rdf chargée!");
+					javax.swing.JOptionPane.showMessageDialog(f,"Le Texte saisis a été validé sous le nom 'tmp.rdf' dans le dossier 'src/main/java/jena/! Vous pouvez commencer à faire vos recherches en allant sur l'onglet 'Recherche' "); 
 
 				} 
-				finally{					  
-					qexec.close();
+				catch (Exception ex) {	
+					ex.printStackTrace();
+					javax.swing.JOptionPane.showMessageDialog(f,"Il semble que ce fichier ne soit pas un rdf/ou du moins le fichier contient quelques erreurs...veuillez rédémarer l'application");
 				}
 
-
-			}//end actionPerformed
-
-
-		}   		
-
-
-
-				);//end actionListener updateGraph 
-
-
-
-		topPanel.add(updateGraph);
-		topPanel.setSize(f.getWidth(),f.getHeight());
-		topPanel.setBackground(Color.WHITE);
-		GridBagLayout gb = new GridBagLayout();
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.BOTH;
-
-		gbc.weightx = 1;
-
-		gbc.weighty = 1;
-
-		gb.setConstraints(topPanel, gbc); // mise en forme des objets
-
-
-		//construction du map de Documents lucene vide
-		
-		HashMap<String,Set<Document>> map = new HashMap<String,Set<Document>>();
-		tableModel = new JTableRessourceModel(map);
-		tableModel.fireTableDataChanged();
-
-		tableau = new JTable(tableModel); 
-		tableau.setBackground(Color.WHITE);
-
-		centerPanel.setViewportView(tableau);
-		gb.setConstraints(centerPanel, gbc);
-
-
-		//initialisation du menu
-
-		initMenu();
-
-
-		//initialisation des onglets
-
-		InitOnglet();
-		tPan[0].setLayout(gb);
-		tPan[0].add(topPanel);
-		tPan[0].add(centerPanel);
-
-		f.setLocationRelativeTo(null);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(400, 200);
-
-
-		//On passe ensuite les onglets au contentpane de la fenetre principale
-		f.getContentPane().add(onglet);
-		f.setVisible(true);
-
-
-
-
-	}
-	public static int deleteDir(File folder) {
-
-		int i=0;
-		for(File file : folder.listFiles()){
-			if(file.isDirectory()){
-
-				deleteDir(file);
 			}
+			else
+				change=0;
 
-			file.delete();
-			i++;
 		}
 
+		public void removeUpdate(DocumentEvent de) { System.out.println("Remove");
 
-		// The directory is now empty so delete it
-		return i;
+
+		if(change==0){}
+		else
+			change=1;}
+		public void changedUpdate(DocumentEvent arg0) {
+
+			System.out.println("change");change=1;
+		}
+	});
+
+	/*Fin de la mis à jours du fichier tmp.rdf*/
+	exit.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent arg0) {
+
+			System.exit(0);
+		}
+	});
+	updateGraph.addActionListener(new ActionListener()	    
+	{
+
+		public void actionPerformed(ActionEvent arg0) {
+
+			List<String>Resource=new ArrayList<String>();
+			int val=tableModel.getRowCount();
+			int i=0;
+			for(i=0;i<val;i++)
+				Resource.add(tableModel.getValueAt(i,1).toString()); 
+			org.graphstream.graph.Graph graphfinal = new SingleGraph("GraphSteiner");
+			String a="";
+
+
+			if(texteEditor && !action.getTexteEditor())
+			{
+				a="src/main/java/jena/tmp.rdf";
+
+			}
+			else
+			{
+				//Supprime l'onglet resultat recherche si il existe
+				
+				a=action.getpath()[0];
+			}
+			
+			try
+			{
+				onglet.removeTabAt(2);
+			}
+			catch(Exception e)
+			{
+
+			}
+			GrapheSteiner=new SousGraph(a,Resource,graphfinal,f,onglet,true);
+
+			GrapheSteiner.exec();
+
+			//MODEL SPARQL crée par la classe SousGraph
+
+			ModelSparql=GrapheSteiner.getNewmodel();
+
+
+			//Permet de Vérifier le contenu du nouvel model 'ModelSparql' crée 
+
+			parcours();
+
+
+			//On récupère le  path du fichier rdf ou owl sélectionné à partir de 
+			// la classe OpenFileChooserAction1
+
+			String split=action.getpath()[1];
+
+			//On associe le path 'split' au  fichier  'out.rdf dans lequel le model 'ModelSparql' va 
+			//être générer (en rdf)
+
+			LienFichierRDF=split+"out.rdf";
+
+
+			System.out.println("liens----->"+a+" "+"split:"+ LienFichierRDF);
+
+
+			//création du fichier rdf du graph  de Steiner ' GrapheSteiner'
+			//à partir du model  'ModelSparql' si le model a été crée vous devez lire son fichier RDF dans 
+			//src/main/java/jena/out.rdf
+
+			//GrapheSteiner.ecrireFileRDF( LienFichierRDF);
+
+
+			//***********************************************************************//
+			//***********************  SPARQL QUERIES *******************************//
+			//***********************************************************************//
+
+			// String queryString = "CONSTRUCT {?subj ?prop ?obj }"
+			// 					+ " WHERE { ?subj a ?obj "
+			// 					+ "FILTER (?obj rdfs:subClassOf* ?subj.)}";
+
+			/* String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "        
+						    		+"PREFIX owl:  <http://www.w3.org/2002/07/owl#> "
+						    		+"PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#> "
+						    		+"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+						    		+"PREFIX film: <http://data.linkedmdb.org/directory/film_company#>"
+						 			+"CONSTRUCT { ?sub ?prop ?y }"
+						    		+"WHERE { ?sub ?prop ?y }";
+				 					//+ "WHERE { ?t rdfs:subClassOf* film:Class . ?y rdf:type ?t }";
+
+			 */
+
+			String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "        
+					+"PREFIX owl:  <http://www.w3.org/2002/07/owl#> "
+					+"PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#> "
+					+"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+					//+"PREFIX film: <http://data.linkedmdb.org/directory/film_company#>"
+					+"CONSTRUCT { ?sub rdf:type  ?obj }"
+					//+ "?sub   rdf:type owl:Class }"
+					+"WHERE {?sub   rdf:type ?obj }";
+
+			/*String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "        
+			    		+"PREFIX owl:  <http://www.w3.org/2002/07/owl#> "
+			    		+"PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#> "
+			    		+"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+			    		//+"PREFIX film: <http://data.linkedmdb.org/directory/#>"
+			    		+"SELECT ?y"
+			    		+"WHERE {?y rdf:type ?x }";
+			    		//+"WHERE {?t rdfs:subClassOf* film:Class . ?y rdf:type ?t}";
+			 */
+			Query query = QueryFactory.create(queryString) ;
+			QueryExecution qexec = QueryExecutionFactory.create(query, ModelSparql);			 
+
+			try {					  
+				//ResultSet results = qexec.execSelect();
+				Model resultModel = qexec.execConstruct() ;		
+				org.graphstream.graph.Graph graphsparc = new SingleGraph("GraphSparql");
+
+				//LIGNE ERIC
+
+				System.out.println("LE MODEL SPARK RENVOIE:"+resultModel.size()+" "+"NOEUDS");
+				//SousGraph GrapheSparql=new SousGraph(graphsparc,onglet,resultModel,false);
+				//output query result
+
+				//ResultSetFormatter.out(System.out, results, query);
+
+				/*for ( ; results.hasNext() ; ){
+
+					 		QuerySolution soln = results.nextSolution() ;					 		
+
+					 		System.out.println("soln: "+soln.toString());
+					 		System.out.println("test = "+soln.varNames().next());
+					 		RDFNode n = soln.get(); //soln.get("x");
+					 		if ( n.isLiteral() ){
+					 	          ((Literal)n).getLexicalForm();
+					 	          System.out.println("je suis Literal");
+					 		}
+					 	    if ( n.isResource() )
+					 	    {
+					 	         Resource r = (Resource)n ;
+					 	        System.out.println("je suis ressource");
+					 	          if ( ! r.isAnon() )
+					 	          {
+					 	            r.getURI();
+					 	            System.out.println("je suis noeud anonyme");
+					 	          }
+					 	    }
+					 	}*/
+
+
+			} 
+			finally{					  
+				qexec.close();
+			}
+
+
+		}//end actionPerformed
+
+
+	}   		
+
+
+
+			);//end actionListener updateGraph 
+	
+}
+	public  projectFrame() {
+
+
+		InitMenu();
+		InitActions();
+	
 	}
+	
 	
 	//PARCOUR DU MOte()DEL  ModelSparql
 
