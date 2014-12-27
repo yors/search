@@ -137,7 +137,7 @@ public class SousGraph {
 		//System.out.println("NOMBRE DE STATEMENT:"+ newmodel.size());
 
 		//LIGNE ERIC
-		if(f)
+		if(!f)
 		{
 			Viewer viewer = new Viewer(graphfinal, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 			viewer.enableAutoLayout();

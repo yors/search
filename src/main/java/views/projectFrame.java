@@ -486,7 +486,7 @@ public void InitActions()
 				//LIGNE ERIC
 
 				System.out.println("LE MODEL SPARK RENVOIE:"+resultModel.size()+" "+"NOEUDS");
-				//SousGraph GrapheSparql=new SousGraph(graphsparc,onglet,resultModel,false);
+				SousGraph GrapheSparql=new SousGraph(graphsparc,onglet,resultModel,false);
 				//output query result
 
 				//ResultSetFormatter.out(System.out, results, query);
