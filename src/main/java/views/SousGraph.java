@@ -1,8 +1,5 @@
 package views;
 
-
-
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.io.BufferedOutputStream;
@@ -41,9 +38,6 @@ import com.hp.hpl.jena.vocabulary.VCARD;
 
 import edu.uci.ics.jung.graph.Graph;
 
-
-
-
 public class SousGraph {
 	private  org.graphstream.graph.Graph graph;
 	private  org.graphstream.graph.Graph graphinit;
@@ -70,6 +64,7 @@ public class SousGraph {
 		this.lien=mot;
 		this.fenetre=fenetre;
 	}
+	
 	public SousGraph(String mot,List<String>Resource,org.graphstream.graph.Graph graphfinal,JFrame fe, JTabbedPane onglet,boolean h)
 	{
 		this.lien=mot;
@@ -80,6 +75,7 @@ public class SousGraph {
 		this.myonglet=onglet;
 		model = FileManager.get().loadModel(lien);
 	}
+
 	public SousGraph(org.graphstream.graph.Graph graphfinal,JTabbedPane onglet,Model model,boolean affiche)
 	{
 		this.graphfinal=graphfinal;
@@ -89,6 +85,7 @@ public class SousGraph {
 		this.model= model;
 		GRAPHINIT();
 	}
+
 	public void exec()
 	{
 		execute(model);
@@ -96,18 +93,15 @@ public class SousGraph {
 
 	public void execute(Model model)
 	{
-
 		g = new JenaJungGraph(model);
-
 		chemin=new HashSet<List<String>>();
 		// System.out.println("NOMBRE DE NOEUD :"+g.getEdgeCount());
 		graph = new SingleGraph("Le plus court chemin");
-
 		newmodel = ModelFactory.createDefaultModel();
 		busyNode=new HashMap<RDFNode,Integer>();
 		mode=new ArrayList<Node>();
-		init(g);
 
+		init(g);
 
 		dijkstra = new Shortway(g);
 		// System.out.println("NODE:"+dijkstra.mynode());
@@ -124,10 +118,8 @@ public class SousGraph {
 
 			for(i=0;i<Resource.size();i++)
 			{
-
 				for(j=0;j<Resource.size();j++)
 				{
-
 					chemin(Resource.get(i),Resource.get(j),graph);
 				}
 			}
@@ -145,15 +137,10 @@ public class SousGraph {
 			JPanel panel=new JPanel();
 			panel.setLayout(new BorderLayout());
 			panel.add(view,BorderLayout.CENTER);
-
-
 			myonglet.addTab("Resultat de La recherche", panel);
 
 		}
-
 	}
-
-
 
 	//Renvoie le grpah initial
 
@@ -163,8 +150,6 @@ public class SousGraph {
 		Statements= new ArrayList<Collection<Statement>>();
 		for(i=0;i<Resource.size();i++)
 		{
-
-
 			Collection<Statement> a=g.getOutEdges(Resource.get(i));
 			Iterator<Statement> d=a.iterator();
 			while(d.hasNext())
@@ -173,21 +158,16 @@ public class SousGraph {
 
 				try
 				{
-
 					String v=f.getObject().toString();
 					String  t=transform(v,"http");
 					if(t.isEmpty()){t=transform(v,"#");}
 					Node e=graphfinal.addNode(v);
-
-
 					e.setAttribute("ui.label",t);
 					Edge ab1=graphfinal.addEdge(f.getSubject().toString()+v,f.getSubject().toString(),v,true);
 					String h=f.getPredicate().toString();
 					String[] pass=h.split("#");
 					String t2=pass[1]; 
-
 					ab1.setAttribute("ui.label",t2);
-
 				}
 				catch(Exception e){
 					System.out.println("Noeud:"+i+" existant déjà");
@@ -195,13 +175,9 @@ public class SousGraph {
 			}
 		}
 
-
-
-
-
 		//System.out.println("STATEMENTTTTTTTTTTTTTTTTT:"+Statements);
-
 	}
+
 	public  void GRAPHINIT()
 	{
 		// model = FileManager.get().loadModel(lien);
@@ -218,12 +194,9 @@ public class SousGraph {
 
 
 		myonglet.addTab("Resultat de La recherche", panel);
-
-
 	}
 
-	//Cree un fichier RDF
-	
+	//Cree un fichier RDF	
 	public void ecrireFileRDF(String fichier){
 
 		try (OutputStream out = new BufferedOutputStream(new FileOutputStream(fichier),1024)) {
@@ -231,8 +204,8 @@ public class SousGraph {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
+
 	public void initGRPAH(Graph<RDFNode, Statement> g)
 	{
 		Collection<Statement> h=g.getEdges();
@@ -242,9 +215,6 @@ public class SousGraph {
 		while(i.hasNext())
 		{
 			Statement s=i.next();
-
-
-
 			RDFNode source= g.getSource(s);
 			RDFNode destination= g.getDest(s);
 			String dest=destination.toString().replaceAll("[^\\w]","");
@@ -253,7 +223,6 @@ public class SousGraph {
 			CreateNoeud(dest,graphinit);
 			CreateEdge(j+"",sourc,dest,s.getPredicate().toString(),graphinit);
 			j++;
-
 		}
 		graphinit.addAttribute("ui.quality");
 		graphinit.addAttribute("ui.antialias");
@@ -264,11 +233,10 @@ public class SousGraph {
 						"node {text-color:black;shadow-mode:plain;size: 20px, 21px; shape: box;fill-color:red;stroke-mode: plain;stroke-color: black;}"
 
 				);
-
 	}
+
 	public void chemin(RDFNode a,RDFNode b,org.graphstream.graph.Graph graph1)
 	{
-
 		List<String> chem=new ArrayList<String>();
 		try
 		{
@@ -277,15 +245,12 @@ public class SousGraph {
 			LinkedList<RDFNode> path = dijkstra.getPath(b);
 			//System.out.println(path.size());
 
-
 			int i,teste;
 
 			if(path.isEmpty())
 			{}
 			else
 			{
-
-
 				for(i=0;i<path.size();i++)
 				{
 					teste=0;
@@ -293,16 +258,11 @@ public class SousGraph {
 					{
 						RDFNode z=dijkstra.getNode(path.get(i).toString());
 						RDFNode z1=dijkstra.getNode(path.get(i+1).toString());
-
 						Statement e1=g.findEdge(z, z1);
-
 
 						if(e1.isReified()){}
 						else
 						{
-
-
-
 							//System.out.println("taille:"+path.size());
 							for(List<String> st : chemin)
 							{
@@ -314,7 +274,6 @@ public class SousGraph {
 										// System.out.println("L'AJOUT DE "+" "+a.toString()+" "+"CREE UN CYCLE"+"avec"+" "+b.toString());
 										teste=1;
 								}
-
 							}
 
 							if(teste==0)
@@ -328,8 +287,6 @@ public class SousGraph {
 								CreateNoeud(path.get(i+1).toString(),graphfinal);
 								Edge ab=graph1.addEdge(path.get(i).toString()+path.get(i+1).toString(), path.get(i).toString(),path.get(i+1).toString());
 
-
-
 								//Construction 
 								Edge ab1=graphfinal.addEdge(path.get(i).toString()+path.get(i+1).toString(), path.get(i).toString(),path.get(i+1).toString(),true);
 
@@ -342,7 +299,6 @@ public class SousGraph {
 								ab.setAttribute("ui.label",t2);
 								ab1.setAttribute("ui.label",t2);
 
-
 								//Construction du NOUVEAU MODEL
 								String resource    =path.get(i).toString().replaceAll("[^\\w]","");
 								String predicat    =e1.getPredicate().toString();
@@ -352,14 +308,9 @@ public class SousGraph {
 								//litn=transform( litn,"http");
 								Resource johnSmith = model.createResource(resource);
 								newmodel.add(model.getResource(resource),model.getProperty(predicat),litteral);
-
 							}
 							else
-								System.out.println("AJOUT imposible"); 	 
-
-							// }
-
-
+								System.out.println("AJOUT imposible"); 						
 
 						}
 					}
@@ -367,20 +318,16 @@ public class SousGraph {
 				}
 			}
 		}
-		catch(Exception e)
-		{
-
-
-		}
+		catch(Exception e){}
 
 		chemin.add(chem);
-
 	}
 
 	public Model getNewmodel()
 	{
 		return newmodel;
 	}
+
 	public void parcours(){
 		StmtIterator iter = newmodel.listStatements();
 
@@ -388,7 +335,6 @@ public class SousGraph {
 		while (iter.hasNext()) {
 
 			Statement stmt      = iter.nextStatement();  // obtenir la prochaine déclaration
-
 			Resource  subject   = stmt.getSubject();     // obtenir le sujet
 			Property  predicate = stmt.getPredicate();   // obtenir le prédicat
 			RDFNode   object    = stmt.getObject();      // obtenir l'objet
@@ -443,68 +389,43 @@ public class SousGraph {
 	}
 	public void CreateEdge(String nom,String source,String Dest,String name,org.graphstream.graph.Graph graph)
 	{
-
-
 		String  t=transform(name,"#");
 		// if(t==null){t=transform(name,"#");}
 		Edge ab=graph.addEdge(nom,source,Dest,true);
 		ab.setAttribute("ui.label",t);
 	}
+
 	public String transform(String c,String delimit)
 	{
-
 		if(delimit.equals("http"))
 		{
 			String[] pass=c.split(delimit);
 			String t =""; 
 			try
 			{
-
-
 				t =pass[0];
 				t=t.replaceAll("[^\\w]","");
 				return t;
-
-
-
-
-
 			}
 			catch(Exception e){
 				return c;
 			}
 		}
-
-
 		else
 		{
 			String[] pass=c.split(delimit);
 			String t="";
 			try
 			{
-
-
-
-				t=pass[1]; 
-
+				t=pass[1];
 				return t;
-
-
-
-
-
 			}
 			catch(Exception e){
 				return c;
 			}
-
-
-
 		}
-
-
-
 	}
+
 	public void CreateNoeud(String c,org.graphstream.graph.Graph f)
 	{
 		String t;
@@ -512,31 +433,16 @@ public class SousGraph {
 		String[] pass1=t.split("#");
 		try
 		{
-
-
-
-
-
-
 			Node e=f.getNode(c);
 			String s=e.toString();
-
 		}
 		catch(Exception e){
-
 
 			t=transform( c,"http");
 			if(t.isEmpty()){t=transform( c,"#");}
 
 			Node a=f.addNode(c);
 			a.setAttribute("ui.label",t);
-
-
-
-
 		}
 	}
-
-
-
 }

@@ -1,5 +1,6 @@
 package views;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import javax.swing.event.DocumentListener;
 import lucene.Searching;
 
 import org.apache.lucene.document.Document;
+import org.apache.lucene.store.FSDirectory;
 
 /**********************************************************************************/
 /*****       CLASSE QUI CONSTRUIT NOTRE ZONE DE RECHERCHE   ***********************/
@@ -63,48 +65,42 @@ public class ChampTexte extends JTextField implements DocumentListener {
 				
 		//recupération du texte-> mots clé à chercher
 		String motif = this.getText();
-		 if(motif.isEmpty())
-		 {}
-		 else
-		 {
-		HashMap<String,Set<Document>> resultats= new HashMap<String,Set<Document>>();
+		if(motif.isEmpty())
+		{}
+		else
+		{
+			HashMap<String,Set<Document>> resultats= new HashMap<String,Set<Document>>();
 		
-		//lancement de la recherche			
-		try {
-			Searching search= new Searching(group.semantic.search.rdf.App.index.getIndexDirectory(),motif);
-			//System.out.print(search.getKeywordResource().get(new String("l2")).iterator().next().get("ressource"));
+			//lancement de la recherche			
+			try {
+
+				//previous version
+				
+				//File indexFile = new File("lucene");
+				//if(indexFile.listFiles().length == 0) throw new Exception("l'index est vide. Veuillez en créer un!");
+				//FSDirectory indexDirectory = FSDirectory.open(indexFile);		
+				//Searching search= new Searching(indexDirectory,motif);
+
+				Searching search= new Searching(group.semantic.search.rdf.App.index.getIndexDirectory(),motif);
+				//System.out.print(search.getKeywordResource().get(new String("l2")).iterator().next().get("ressource"));
+				
+				//recuperation des eventuels documents trouvés
+				resultats= search.getKeywordResource();	
+				
+				System.out.println(motif+": result ds champ texte "+resultats);
+				
+			} 
+	    	catch (Exception e1) {			
+				e1.printStackTrace();
+			}
 			
-			//recuperation des eventuels documents trouvés
-			resultats= search.getKeywordResource();	
+			//traitement et affichage du resultat sur le tableau -- recharger l'ancien model de la table par le nouveau 			
 			
-			System.out.println(motif+": result ds champ texte "+resultats);
+			//on recharge le model			 
+			projectFrame.tableModel.setKeyDocs(resultats);			
 			
-		} 
-    	catch (Exception e1) {			
-			e1.printStackTrace();
+			//on informe la table que les données du modèle ont changé			 
+			projectFrame.tableModel.fireTableDataChanged();		
 		}
-		
-		//traitement et affichage du resultat sur le tableau
-		//recharger l'ancien model de la table par le nouveau 
-		
-		//on recharge le model
-		/**
-		 * version avec ProjectFrame
-		 */
-		//ProjectFrame.modelJTable.setKeyDocs(resultats);	
-		
-		/**
-		 * version avec teste2
-		 */
-		projectFrame.tableModel.setKeyDocs(resultats);
-		
-		
-		/** on informe la table que les données du modèle ont changé
-		 *  table.setTableModel(newModel);
-		 */
-		//ProjectFrame.modelJTable.fireTableDataChanged();
-		
-		projectFrame.tableModel.fireTableDataChanged();		
-	}
 	}
 }
