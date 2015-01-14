@@ -81,7 +81,7 @@ public class SousGraph {
 		this.graphfinal=graphfinal;
 		this.myonglet=onglet;
 		f=affiche;
-		System.out.println(" sparql version ERICCC: "+model.size());
+		//System.out.println(" sparql version ERICCC: "+model.size());
 		this.model= model;
 		GRAPHINIT();
 	}
@@ -129,7 +129,7 @@ public class SousGraph {
 		//System.out.println("NOMBRE DE STATEMENT:"+ newmodel.size());
 
 		//LIGNE ERIC
-		if(!f)
+		if(f)
 		{
 			Viewer viewer = new Viewer(graphfinal, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 			viewer.enableAutoLayout();
@@ -159,6 +159,7 @@ public class SousGraph {
 				try
 				{
 					String v=f.getObject().toString();
+					
 					String  t=transform(v,"http");
 					if(t.isEmpty()){t=transform(v,"#");}
 					Node e=graphfinal.addNode(v);
@@ -168,9 +169,18 @@ public class SousGraph {
 					String[] pass=h.split("#");
 					String t2=pass[1]; 
 					ab1.setAttribute("ui.label",t2);
+					//Construction du NOUVEAU MODEL
+					String resource    =f.getSubject().toString().replaceAll("[^\\w]","");
+					String predicat    =f.getPredicate().toString();
+					String litn;
+					v=v.replaceAll("[^\\w]","");
+					Resource johnSmith = model.createResource(resource);
+					newmodel.add(model.getResource(resource),model.getProperty(predicat),v);
 				}
 				catch(Exception e){
-					System.out.println("Noeud:"+i+" existant déjà");
+					//System.out.println("Noeud:"+i+" existant déjà");
+					System.out.print("");
+					//e.printStackTrace();
 				} 
 			}
 		}
@@ -309,8 +319,10 @@ public class SousGraph {
 								Resource johnSmith = model.createResource(resource);
 								newmodel.add(model.getResource(resource),model.getProperty(predicat),litteral);
 							}
-							else
-								System.out.println("AJOUT imposible"); 						
+							else{
+								//System.out.println("AJOUT imposible"); 
+								System.out.print("");
+							}
 
 						}
 					}
@@ -328,7 +340,7 @@ public class SousGraph {
 		return newmodel;
 	}
 
-	public void parcours(){
+/*	public void parcours(){
 		StmtIterator iter = newmodel.listStatements();
 
 		// affiche l'objet, le prédicat et le sujet de chaque déclaration
@@ -349,6 +361,7 @@ public class SousGraph {
 			System.out.println(" ");
 		}
 	}
+*/
 
 	public void init(Graph<RDFNode, Statement> g)
 	{

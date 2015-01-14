@@ -1,6 +1,5 @@
 package views;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -9,9 +8,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import lucene.Searching;
-
 import org.apache.lucene.document.Document;
-import org.apache.lucene.store.FSDirectory;
 
 /**********************************************************************************/
 /*****       CLASSE QUI CONSTRUIT NOTRE ZONE DE RECHERCHE   ***********************/
@@ -81,13 +78,13 @@ public class ChampTexte extends JTextField implements DocumentListener {
 				//FSDirectory indexDirectory = FSDirectory.open(indexFile);		
 				//Searching search= new Searching(indexDirectory,motif);
 
-				Searching search= new Searching(group.semantic.search.rdf.App.index.getIndexDirectory(),motif);
+				Searching search= new Searching(fr.uvsq.project.rdfSearch.App.index.getIndexDirectory(),motif);
 				//System.out.print(search.getKeywordResource().get(new String("l2")).iterator().next().get("ressource"));
 				
 				//recuperation des eventuels documents trouvés
 				resultats= search.getKeywordResource();	
 				
-				System.out.println(motif+": result ds champ texte "+resultats);
+				//System.out.println(motif+": result ds champ texte "+resultats);
 				
 			} 
 	    	catch (Exception e1) {			
@@ -97,10 +94,10 @@ public class ChampTexte extends JTextField implements DocumentListener {
 			//traitement et affichage du resultat sur le tableau -- recharger l'ancien model de la table par le nouveau 			
 			
 			//on recharge le model			 
-			projectFrame.tableModel.setKeyDocs(resultats);			
+			ProjectFrame.tableModel.setKeyDocs(resultats);			
 			
 			//on informe la table que les données du modèle ont changé			 
-			projectFrame.tableModel.fireTableDataChanged();		
+			ProjectFrame.tableModel.fireTableDataChanged();		
 		}
 	}
 }

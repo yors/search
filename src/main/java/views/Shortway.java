@@ -10,15 +10,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.graphstream.graph.implementations.SingleGraph;
+//import org.graphstream.graph.implementations.SingleGraph;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Statement;
 
 import edu.uci.ics.jung.graph.Graph;
 
-public class Shortway {
+public class Shortway{
+	
 	  private final List<RDFNode> nodes;
 	  private final List<Statement> edges;
 	  private Set<RDFNode> settledNodes;
@@ -26,10 +26,9 @@ public class Shortway {
 	  private Map<RDFNode, RDFNode> predecessors;
 	  private Map<RDFNode, Integer> distance;
 	  Graph<RDFNode, Statement> mongraph;
-	  private Map<String,RDFNode> node;
-	 
+	  private Map<String,RDFNode> node;	 
 	  
-	  public Shortway(Graph<RDFNode, Statement> graph) {
+	  public Shortway(Graph<RDFNode, Statement> graph){
 		   this. nodes = new ArrayList<RDFNode>();
 		    this.edges = new ArrayList<Statement>(graph.getEdges());
 		    this.node=new HashMap<String,RDFNode>();
@@ -40,11 +39,10 @@ public class Shortway {
             {
 		    	RDFNode a=ite.next();
                 nodes.add(a);
-               // System.out.println("NODE:"+a.toString()+"------>"+a);
-               
+               // System.out.println("NODE:"+a.toString()+"------>"+a);               
             }
 		    Collection<Statement> h=graph.getEdges();
-	         Iterator<Statement> i=h.iterator();
+	        Iterator<Statement> i=h.iterator();
 
              while(i.hasNext())
              {
@@ -52,67 +50,59 @@ public class Shortway {
                  edges.add(s);
                  node.put(graph.getSource(s).toString(),graph.getSource(s));
                  node.put(graph.getDest(s).toString(),graph.getDest(s));
-             }
-	      
-		   
-		  }
+              }		   
+	  }//end constructeur
 	  
-	  public Map<String,RDFNode> mynode()
-	  {
+	  public Map<String,RDFNode> mynode(){
 		  return node;
 	  }
-	  public List<RDFNode>Node()
-	  {
+	  
+	  public List<RDFNode>Node(){
 		  return nodes;
 	  }
-	  public List<Statement>Edge()
-	  {
+	  
+	  public List<Statement>Edge(){
 		  return edges;
 	  }
-	  public RDFNode getNode(String a)
-	  {
-		         
+	  
+	  public RDFNode getNode(String a){		         
 		  return node.get(a) ;
-	  }
+	  }	  
 	  
-	  
-	  public void execute(RDFNode source) {
+	  public void execute(RDFNode source){
 		    settledNodes = new HashSet<RDFNode>();
 		    unSettledNodes = new HashSet<RDFNode>();
 		    distance = new HashMap<RDFNode, Integer>();
 		    predecessors = new  HashMap<RDFNode, RDFNode>();
 		    distance.put(source, 0);
 		    unSettledNodes.add(source);
-		    while (unSettledNodes.size() > 0) {
-		    	RDFNode node = getMinimum(unSettledNodes);
-		      settledNodes.add(node);
-		      unSettledNodes.remove(node);
-		      findMinimalDistances(node);
+		    while (unSettledNodes.size() > 0){
+		    	  RDFNode node = getMinimum(unSettledNodes);
+			      settledNodes.add(node);
+			      unSettledNodes.remove(node);
+			      findMinimalDistances(node);
 		    }
-		  }
-	  private void findMinimalDistances(RDFNode node) {
+	  }
+	  
+	  private void findMinimalDistances(RDFNode node){
 		   
 		    Collection<RDFNode> adjacentNodes=mongraph.getNeighbors(node);
 		    Iterator<RDFNode> i=adjacentNodes.iterator();
 		    List<RDFNode> voisin =new  ArrayList<RDFNode>();
 		    while(i.hasNext())
 		    voisin.add(i.next());
-           
-	
-		             
-		              
-		    for (RDFNode target : voisin) {
-		      if (getShortestDistance(target) > getShortestDistance(node)
-		          + 1) {
-		        distance.put(target, getShortestDistance(node)
-		            + 1);
-		        predecessors.put(target, node);
-		        unSettledNodes.add(target);
-		      }
+                     
+		    for (RDFNode target : voisin){
+			      if (getShortestDistance(target) > getShortestDistance(node)+ 1){
+			        distance.put(target, getShortestDistance(node)
+			            + 1);
+			        predecessors.put(target, node);
+			        unSettledNodes.add(target);
+			      }
 		    }
-
-		  }
-		  private RDFNode getMinimum(Set<RDFNode>  vertexes) {
+	  }
+	
+	  private RDFNode getMinimum(Set<RDFNode>  vertexes){
 			  RDFNode minimum = null;
 		    for (RDFNode vertex : vertexes) {
 		      if (minimum == null) {
@@ -134,8 +124,8 @@ public class Shortway {
 		    }
 		  }
 		  
-		  //Retourne l'ensemble des noeud qui constitue le chemin
-		  public LinkedList<RDFNode> getPath(RDFNode target) {
+		//Retourne l'ensemble des noeud qui constitue le chemin
+		public LinkedList<RDFNode> getPath(RDFNode target) {
 			    LinkedList<RDFNode> path = new LinkedList<RDFNode>();
 			    RDFNode step = target;
 			    // check if a path exists
@@ -151,8 +141,6 @@ public class Shortway {
 			    // Put it into the correct order
 			    Collections.reverse(path);
 			    return path;
-			  }
-
-			
+		}			
 
 }

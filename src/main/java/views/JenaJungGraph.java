@@ -40,7 +40,7 @@ public class JenaJungGraph implements DirectedGraph<RDFNode, Statement>
 
     public Collection<Statement> getOutEdges(RDFNode vertex) {
         if (log) System.err.println("getOutEdges");
-        if (vertex.isLiteral()) return Collections.EMPTY_LIST;
+        if (vertex.isLiteral()) return Collections.emptyList();
         else return asCollection(model.listStatements((Resource) vertex, null, (RDFNode) null));
     }
 
@@ -52,7 +52,7 @@ public class JenaJungGraph implements DirectedGraph<RDFNode, Statement>
 
     public Collection<RDFNode> getSuccessors(RDFNode vertex) {
         if (log) System.err.println("getSucessors");
-        if (vertex.isLiteral()) return Collections.EMPTY_LIST;
+        if (vertex.isLiteral()) return Collections.emptyList();
         else return asCollection(model.listObjectsOfProperty((Resource) vertex, null));
     }
 
@@ -117,7 +117,7 @@ public class JenaJungGraph implements DirectedGraph<RDFNode, Statement>
 
     public Pair<RDFNode> getEndpoints(Statement edge) {
         if (log) System.err.println("getEndpoints: " + edge);
-        return new Pair(edge.getSubject(), edge.getObject());
+        return new Pair<RDFNode>(edge.getSubject(), edge.getObject());
     }
 
     public RDFNode getOpposite(RDFNode vertex, Statement edge) {
@@ -259,7 +259,7 @@ public class JenaJungGraph implements DirectedGraph<RDFNode, Statement>
     public Collection<Statement> getEdges(EdgeType edge_type) {
         if (log) System.err.println("getEdges(type)");
         if (edge_type.equals(EdgeType.DIRECTED)) return getEdges();
-        else return Collections.EMPTY_LIST;
+        else return Collections.emptyList();
     }
 
     public int getEdgeCount(EdgeType edge_type) {

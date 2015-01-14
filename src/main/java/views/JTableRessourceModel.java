@@ -11,13 +11,10 @@ import org.apache.lucene.document.Document;
 
 
 public class JTableRessourceModel extends  AbstractTableModel{
-
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;	
 	
-	/**
-	 * contient l'association mot clé et set de documents trouvés
-	 */
+	//contient l'association mot clé et set de documents trouvés	
 	private HashMap<String,Set<Document>> keysDocs;
 	/**
 	 * element position permet de reperer la position dans le table 
@@ -60,7 +57,7 @@ public class JTableRessourceModel extends  AbstractTableModel{
 		    // comptabilisons le nombre de documents 
 		    nDocuments += value.size();		    
 		}
-		System.out.println("nombre de docs: "+nDocuments);
+		//System.out.println("nombre de docs: "+nDocuments);
 		return nDocuments;
 	}
 
@@ -72,7 +69,6 @@ public class JTableRessourceModel extends  AbstractTableModel{
 		else{
 			return docsRows.get(row).get("ressource");
 		}
-
 	}
 	
 	/* (non-Javadoc)
@@ -88,27 +84,25 @@ public class JTableRessourceModel extends  AbstractTableModel{
         }
         return null;
     }
-
-	/*
-	 * permet de convertir l'ensemble hashmap en tableau pour l'affichage
-	 */
+	
+	//permet de convertir l'ensemble hashmap en tableau pour l'affichage	 
     
     private void hashMaptoArray(HashMap<String,Set<Document>> keyDocs){
     	 keysRows =  new ArrayList<String>(); // l'ensemble des lignes mots clés
-    	 docsRows = new ArrayList<Document>(); //
-    	for(Entry<String, Set<Document>> entry : keysDocs.entrySet()){//parcourir les ensembles du HashMap
-    		String key = entry.getKey();
-    		Set<Document> value = entry.getValue(); ;//un mot-clé associé a un ensemble de docs
-    		Iterator<Document>  iterkeydocs = value.iterator();
-    		while(iterkeydocs.hasNext()){ // parcourir l'ensemble de ressources associé à key
-    			keysRows.add(key);//pour mulitplier la clé dans l'array afin d'avoir autan de clés que de ressources
-    			iterkeydocs.next();
-    		}
-    		docsRows.addAll(value);//remplir le tableau de docs avec les ensembles du HashMap
-    		}
-    
-    } 
-   
-  
-    
+    	 docsRows = new ArrayList<Document>(); 
+    	 
+    	 for(Entry<String, Set<Document>> entry : keysDocs.entrySet())
+    	 {
+    		//parcourir les ensembles du HashMap
+	    	String key = entry.getKey();
+	    	Set<Document> value = entry.getValue(); ;//un mot-clé associé a un ensemble de docs
+	    	Iterator<Document>  iterkeydocs = value.iterator();
+	    	while(iterkeydocs.hasNext())
+	    	{  //parcourir l'ensemble de ressources associé à key
+	    		keysRows.add(key);//pour mulitplier la clé dans l'array afin d'avoir autan de clés que de ressources
+	    		iterkeydocs.next();
+	    	}
+	    	docsRows.addAll(value);//remplir le tableau de docs avec les ensembles du HashMap
+    	  }    
+    }     
 }
