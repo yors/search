@@ -12,7 +12,8 @@ import org.apache.lucene.search.Query;
  * 
  */
 public class QueryBuild {	
-	
+	// autres tests
+	// ça y est les choses fonctionnents
 	//number of keywords 
 	private	int nbreMot;
 	

@@ -33,6 +33,9 @@ public class ChampTexte extends JTextField implements DocumentListener {
 		this.getDocument().addDocumentListener(this);
 	}
 	
+	// juste une modification de test pour voir si tout est ok, 
+	//toto
+	
 	/**
 	 * constructor with the given field's width
 	 * @param i the field's width
@@ -41,6 +44,8 @@ public class ChampTexte extends JTextField implements DocumentListener {
 	public ChampTexte(int i) {
 		super(i);		
 		this.getDocument().addDocumentListener(this);
+		
+		// hELLO
 	}
 
 	public void changedUpdate(DocumentEvent arg0) {
